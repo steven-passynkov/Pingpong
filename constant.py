@@ -1,5 +1,5 @@
-screenWidth = 800
-screenHeight = 600
-ballSize = 15
-speed_step_up = 5
-speed_step_down = -5
+SCREENWIDTH = 800
+SCREENHEIGHT = 600
+BALLSIZE = 15
+SPEED_STEP_UP = 5
+SPEED_STEP_DOWN = -5
