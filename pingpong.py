@@ -35,7 +35,7 @@ def esc():
 
 while True:
     pg.init()
-    size = [screenWidth, screenHeight]
+    size = [SCREENWIDTH, SCREENHEIGHT]
     screen = pg.display.set_mode(size)
 
     pg.display.set_caption("PingPong")
@@ -63,7 +63,7 @@ while True:
     while state == 0:
         esc()
 
-        screen.fill(black)
+        screen.fill(BLACK)
 
         howToPlay1 = myfont.render("To play you need two players.", 1, (255, 255, 255))
         howToPlay2 = myfont.render(
@@ -87,17 +87,17 @@ while True:
                 esc()
         if keys[pg.K_w] == 1 or keys[pg.K_s] == 1:
             if keys[pg.K_w] == 1:
-                speed_y_player_ai = speed_step_down
+                speed_y_player_ai = SPEED_STEP_DOWN
             if keys[pg.K_s] == 1:
-                speed_y_player_ai = speed_step_up
+                speed_y_player_ai = SPEED_STEP_UP
         if keys[pg.K_w] == 0 and keys[pg.K_s] == 0:
             speed_y_player_ai = 0
 
         if keys[pg.K_UP] == 1 or keys[pg.K_DOWN] == 1:
             if keys[pg.K_UP] == 1:
-                speed_y_player = speed_step_down
+                speed_y_player = SPEED_STEP_DOWN
             if keys[pg.K_DOWN] == 1:
-                speed_y_player = speed_step_up
+                speed_y_player = SPEED_STEP_UP
         if keys[pg.K_UP] == 0 and keys[pg.K_DOWN] == 0:
             speed_y_player = 0
 
@@ -105,48 +105,48 @@ while True:
             game.x += game.speed_x
             game.y += game.speed_y
 
-            if game.y > screenHeight - ballSize or game.y < ballSize:
+            if game.y > SCREENHEIGHT - BALLSIZE or game.y < BALLSIZE:
                 game.speed_y *= -1
-            if game.x > screenWidth - ballSize or game.x < ballSize:
+            if game.x > SCREENWIDTH - BALLSIZE or game.x < BALLSIZE:
                 game.speed_x *= -1
-            if game.x > screenWidth - ballSize:
+            if game.x > SCREENWIDTH - BALLSIZE:
                 state = 2
-            if game.x < ballSize:
+            if game.x < BALLSIZE:
                 state = 2
 
-        if y_player + 100 > screenHeight - ballSize:
-            speed_y_player = speed_step_down
-        if y_player < ballSize:
+        if y_player + 100 > SCREENHEIGHT - BALLSIZE:
+            speed_y_player = SPEED_STEP_DOWN
+        if y_player < BALLSIZE:
             speed_y_player = 5
 
-        if y_player_ai + 100 > screenHeight - ballSize:
-            speed_y_player_ai = speed_step_down
-        if y_player_ai < ballSize:
-            speed_y_player_ai = speed_step_up
+        if y_player_ai + 100 > SCREENHEIGHT - BALLSIZE:
+            speed_y_player_ai = SPEED_STEP_DOWN
+        if y_player_ai < BALLSIZE:
+            speed_y_player_ai = SPEED_STEP_UP
 
         y_player += speed_y_player
         y_player_ai += speed_y_player_ai
         if (
             1 + y_player <= game.y
             and game.y <= 100 + y_player
-            and game.x > 750 - ballSize
+            and game.x > 750 - BALLSIZE
         ):
-            game.speed_x = speed_step_down
+            game.speed_x = SPEED_STEP_DOWN
             counter += 1
         if (
             1 + y_player_ai <= game.y
             and game.y <= 100 + y_player_ai
-            and game.x - 26 < 55 - ballSize
+            and game.x - 26 < 55 - BALLSIZE
         ):
-            game.speed_x = speed_step_up
+            game.speed_x = SPEED_STEP_UP
             counter += 1
-        screen.fill(black)
+        screen.fill(BLACK)
 
         label = counterfont.render(str(counter), 1, (255, 255, 255))
         screen.blit(label, (400, 50))
 
-        pg.draw.line(screen, white, (750, y_player + 100), (750, y_player), 5)
-        pg.draw.line(screen, white, (50, y_player_ai + 100), (50, y_player_ai), 5)
+        pg.draw.line(screen, WHITE, (750, y_player + 100), (750, y_player), 5)
+        pg.draw.line(screen, WHITE, (50, y_player_ai + 100), (50, y_player_ai), 5)
 
         for ball in ball_list:
             color = (
@@ -154,13 +154,13 @@ while True:
                 random.randint(0, 255),
                 random.randint(0, 255),
             )
-            pg.draw.circle(screen, color, [game.x, game.y], ballSize)
+            pg.draw.circle(screen, color, [game.x, game.y], BALLSIZE)
 
         clock.tick(60)
         pg.display.flip()
     while state == 2:
         esc()
-        screen.fill(black)
+        screen.fill(BLACK)
 
         endGame = myfont.render(
             "You lost. Your our score is " + str(counter), 1, (255, 255, 255)
