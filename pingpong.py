@@ -2,19 +2,10 @@ import pygame as pg
 import random
 import time
 import sys
-
-red = (255, 0, 0)
-green = (0, 255, 0)
-blue = (0, 0, 255)
-white = (255, 255, 255)
-black = (0, 0, 0)
-
-screenWidth = 800
-screenHeight = 600
-ballSize = 15
+from color import *
+from constant import *
 
 state = 0
-
 
 class Game:
     def __init__(self):
@@ -22,7 +13,6 @@ class Game:
         self.y = 0
         self.speed_x = 0
         self.speed_y = 0
-
 
 def make_ball():
     game = Game()
@@ -97,17 +87,17 @@ while True:
                 esc()
         if keys[pg.K_w] == 1 or keys[pg.K_s] == 1:
             if keys[pg.K_w] == 1:
-                speed_y_player_ai = -5
+                speed_y_player_ai = speed_step_down
             if keys[pg.K_s] == 1:
-                speed_y_player_ai = 5
+                speed_y_player_ai = speed_step_up
         if keys[pg.K_w] == 0 and keys[pg.K_s] == 0:
             speed_y_player_ai = 0
 
         if keys[pg.K_UP] == 1 or keys[pg.K_DOWN] == 1:
             if keys[pg.K_UP] == 1:
-                speed_y_player = -5
+                speed_y_player = speed_step_down
             if keys[pg.K_DOWN] == 1:
-                speed_y_player = 5
+                speed_y_player = speed_step_up
         if keys[pg.K_UP] == 0 and keys[pg.K_DOWN] == 0:
             speed_y_player = 0
 
@@ -125,14 +115,14 @@ while True:
                 state = 2
 
         if y_player + 100 > screenHeight - ballSize:
-            speed_y_player = -5
+            speed_y_player = speed_step_down
         if y_player < ballSize:
             speed_y_player = 5
 
         if y_player_ai + 100 > screenHeight - ballSize:
-            speed_y_player_ai = -5
+            speed_y_player_ai = speed_step_down
         if y_player_ai < ballSize:
-            speed_y_player_ai = 5
+            speed_y_player_ai = speed_step_up
 
         y_player += speed_y_player
         y_player_ai += speed_y_player_ai
@@ -141,14 +131,14 @@ while True:
             and game.y <= 100 + y_player
             and game.x > 750 - ballSize
         ):
-            game.speed_x = -5
+            game.speed_x = speed_step_down
             counter += 1
         if (
             1 + y_player_ai <= game.y
             and game.y <= 100 + y_player_ai
             and game.x - 26 < 55 - ballSize
         ):
-            game.speed_x = 5
+            game.speed_x = speed_step_up
             counter += 1
         screen.fill(black)
 
@@ -173,9 +163,9 @@ while True:
         screen.fill(black)
 
         endGame = myfont.render(
-            "You lost  your our score is " + str(counter), 1, (255, 255, 255)
+            "You lost. Your our score is " + str(counter), 1, (255, 255, 255)
         )
-        play = myfont.render("Press any where to play again", 1, (255, 255, 255))
+        play = myfont.render("Press anywhere to play again", 1, (255, 255, 255))
 
         screen.blit(endGame, (210, 200))
         screen.blit(play, (200, 300))
