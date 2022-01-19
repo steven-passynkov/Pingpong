@@ -35,6 +35,7 @@ def esc():
 
 while True:
     pg.init()
+    pg.event.pump()
     size = [SCREENWIDTH, SCREENHEIGHT]
     screen = pg.display.set_mode(size)
 
@@ -61,8 +62,6 @@ while True:
     counterfont = pg.font.SysFont("freesansbold", 60)
 
     while state == 0:
-        esc()
-
         screen.fill(BLACK)
 
         howToPlay1 = myfont.render("To play you need two players.", 1, (255, 255, 255))
@@ -159,7 +158,6 @@ while True:
         clock.tick(60)
         pg.display.flip()
     while state == 2:
-        esc()
         screen.fill(BLACK)
 
         endGame = myfont.render(
