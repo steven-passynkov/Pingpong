@@ -23,16 +23,6 @@ def make_ball():
     game.speed_y = -2.5
     return game
 
-
-def esc():
-    for event in pg.event.get():
-        if event.type == pg.QUIT:
-            pg.display.update()
-            pg.display.quit()
-            pg.quit()
-            sys.exit()
-
-
 while True:
     pg.init()
     pg.event.pump()
@@ -73,17 +63,24 @@ while True:
         screen.blit(howToPlay2, (125, 300))
         screen.blit(howToPlay3, (240, 400))
         for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.display.update()
+                pg.display.quit()
+                pg.quit()
+                sys.exit()
             if event.type == pg.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     state = 1
         pg.display.flip()
         clock.tick(60)
     while state == 1:
-        esc()
         keys = pg.key.get_pressed()
         for event in pg.event.get():
             if event.type == pg.QUIT:
-                esc()
+                pg.display.update()
+                pg.display.quit()
+                pg.quit()
+                sys.exit()
         if keys[pg.K_w] == 1 or keys[pg.K_s] == 1:
             if keys[pg.K_w] == 1:
                 speed_y_player_ai = SPEED_STEP_DOWN
@@ -169,6 +166,11 @@ while True:
         screen.blit(play, (200, 300))
 
         for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.display.update()
+                pg.display.quit()
+                pg.quit()
+                sys.exit()
             if event.type == pg.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     state = 1
